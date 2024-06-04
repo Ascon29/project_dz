@@ -1,4 +1,5 @@
 from masks import return_card_number, return_account_number
+from datetime import datetime
 
 def mask_account_card(account_card: str) -> str:
     '''функция, которая возвращает строку с маской номера счета или карты'''
@@ -10,11 +11,13 @@ def mask_account_card(account_card: str) -> str:
 
 
 def get_data(data: str) -> str:
-    pass
+    date_obj = datetime.strptime(data, '%Y-%m-%dT%H:%M:%S.%f')
+    return date_obj.strftime('%d.%m.%Y')
 
-
+date_str = '2018-07-11T02:26:18.671407'
 x = 'Счет 73654108430135874305'
 print(mask_account_card(x))
+print(get_data(date_str))
 
 # Maestro 1596837868705199
 # Счет 64686473678894779589
