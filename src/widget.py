@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from masks import return_account_number, return_card_number
+from src.masks import return_account_number, return_card_number
 
 
 def mask_account_card(account_card: str) -> str:
@@ -8,6 +8,8 @@ def mask_account_card(account_card: str) -> str:
     new_str = account_card.split()
     if len(new_str) == 3:
         return f"{new_str[0]} {new_str[1]} {return_card_number(new_str[2])}"
+    elif len(new_str[-1]) == 16:
+        return f"{new_str[0]} {return_card_number(new_str[1])}"
     else:
         return f"{new_str[0]} {return_account_number(new_str[1])}"
 
