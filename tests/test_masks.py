@@ -1,4 +1,4 @@
-from src.masks import return_card_number, return_account_number
+from src.masks import return_account_number, return_card_number
 
 
 def test_return_card_number(card_number):
