@@ -3,6 +3,12 @@ from typing import Any, Callable
 
 
 def log(filename: str | None = "") -> Callable:
+    """
+    Декоратор для логирования вызовов функции.
+    Параметры:  filename (str | None): Путь к файлу для логов. Если не указан, лог выводится в консоль.
+    Возвращает: Callable: Обёрнутая функция с логированием.
+    """
+
     def wrapper(func: Callable) -> Callable:
         @wraps(func)
         def inner(*args: Any, **kwargs: Any) -> Any:
@@ -26,3 +32,6 @@ def log(filename: str | None = "") -> Callable:
         return inner
 
     return wrapper
+
+
+print(help(log))
