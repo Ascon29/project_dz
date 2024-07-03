@@ -9,8 +9,12 @@ API_KEY = os.getenv("API_KEY")
 
 
 def get_rub_transaction(operation):
-    """функция, которая принимает на вход транзакцию и возвращает сумму
-    транзакции (amount) в рублях, тип данных — float."""
+    """
+    функция, которая принимает на вход транзакцию и возвращает сумму
+    транзакции (amount) в рублях, тип данных — float.
+    :param operation: операция по траназкции в виде словаря
+    :return: сумма транзакции в рублях.
+    """
 
     amount = operation["amount"]
     convert_from = operation["currency"]
@@ -22,8 +26,12 @@ def get_rub_transaction(operation):
 
 
 def convert_to_rub(convert_from):
-    """функция обращается к внешнему API для получения текущего
-    курса валют и конвертации суммы операции в рубли"""
+    """
+    функция обращается к внешнему API для получения текущего
+    курса валют и конвертации суммы операции в рубли
+    :param convert_from: валюта в виде строки (пример - 'USD')
+    :return: курс полученной валюты в рублях.
+    """
 
     headers = {"apikey": API_KEY}
     params = {"base": convert_from, "sumbols": "RUB"}
