@@ -41,11 +41,11 @@ def get_operations(file_path):
 
 
 def get_operations_from_csv(file_path):
-    '''функция принимает путь до CSV файла и возвращает список с данными
+    """функция принимает путь до CSV файла и возвращает список с данными
     о финансовых транзакциях
     :param file_path: путь до CSV файла.
     :return: list с данными о транзакцих
-    '''
+    """
     with open(file_path, "r", encoding="utf-8") as file:
         reader = csv.reader(file, delimiter=";")
         header = next(reader)
@@ -59,13 +59,14 @@ def get_operations_from_csv(file_path):
 
 
 def get_operations_from_xlsx(file_path):
-    '''функция принимает путь до XLSX файла и возвращает список с данными
+    """функция принимает путь до XLSX файла и возвращает список с данными
     о финансовых транзакциях
     :param file_path: путь до XLSX файла.
     :return: list с данными о транзакцих
-    '''
-    operations = pd.read_excel(file_path).to_json(orient='records')
+    """
+    operations = pd.read_excel(file_path).to_json(orient="records")
     return json.loads(operations)
+
 
 # print(get_operations_from_csv('data/transactions.csv'))
 # print(get_operations_from_xlsx('data/transactions_excel.xlsx'))
