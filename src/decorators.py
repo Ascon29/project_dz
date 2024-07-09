@@ -32,6 +32,3 @@ def log(filename: str | None = "") -> Callable:
         return inner
 
     return wrapper
-
-
-print(help(log))

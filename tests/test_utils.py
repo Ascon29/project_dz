@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 # import os
 import pytest
+
 from src.utils import get_operations, get_operations_from_csv, get_operations_from_xlsx
 
 
