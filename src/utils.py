@@ -5,9 +5,11 @@ import os
 
 import pandas as pd
 
-logger = logging.getLogger("utils")
+from config import LOGS_UTILS_DIR
+
+logger = logging.getLogger(__file__)
 logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler("../logs/utils.log", "w")
+file_handler = logging.FileHandler(LOGS_UTILS_DIR, "w")
 file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
@@ -28,7 +30,7 @@ def get_operations(file_path):
         return []
     try:
         logger.info(f"открытие файла {file_path}")
-        with open(file_path, encoding="utf-8") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             operations = json.load(file)
             logger.info(f"запись информации {operations}")
             if isinstance(operations, list):
@@ -47,16 +49,15 @@ def get_operations_from_csv(file_path):
     :param file_path: путь до CSV файла.
     :return: list с данными о транзакцих
     """
-    with open(file_path, "r", encoding="utf-8") as file:
-        reader = csv.reader(file, delimiter=";")
-        header = next(reader)
-        result = []
-        for row in reader:
-            row_dict = dict()
-            for index, item in enumerate(header):
-                row_dict[item] = row[index]
-            result.append(row_dict)
-    return result
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            reader = csv.DictReader(file, delimiter=";")
+            result = []
+            for row in reader:
+                result.append(row)
+            return result
+    except FileNotFoundError as ex:
+        return f"{ex}: Файл не найден"
 
 
 def get_operations_from_xlsx(file_path):
@@ -65,10 +66,14 @@ def get_operations_from_xlsx(file_path):
     :param file_path: путь до XLSX файла.
     :return: list с данными о транзакцих
     """
-    operations = pd.read_excel(file_path).to_json(orient="records")
-    return json.loads(operations)
+    try:
+        with open(file_path, "rb") as file:
+            operations = pd.read_excel(file).to_dict("records")
+            return operations
+    except FileNotFoundError as ex:
+        return f"{ex}: Файл не найден"
 
 
 # print(get_operations('data/operations.json'))
-# print(get_operations_from_csv('data/transactions.csv'))
+# print(get_operations_from_csv('../data/transactions.csv'))
 # print(get_operations_from_xlsx('data/transactions_excel.xlsx'))
