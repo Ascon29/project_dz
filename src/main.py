@@ -1,3 +1,4 @@
+from config import DATA_DIR
 from src.processing import filter_by_state, sort_by_date, sort_by_input
 from src.utils import get_operations, get_operations_from_csv, get_operations_from_xlsx
 from src.widget import get_data, mask_account_card
@@ -27,13 +28,13 @@ def main():
 
     if menu_choise == "1":
         print("Для обработки выбран JSON-файл.\n")
-        transactions_data = get_operations("../data/operations.json")
+        transactions_data = get_operations(DATA_DIR + "/operations.json")
     elif menu_choise == "2":
         print("Для обработки выбран CSV-файл.\n")
-        transactions_data = get_operations_from_csv("../data/transactions.csv")
+        transactions_data = get_operations_from_csv(DATA_DIR + "/transactions.csv")
     elif menu_choise == "3":
         print("Для обработки выбран XLSX-файл.\n")
-        transactions_data = get_operations_from_xlsx("../data/transactions_excel.xlsx")
+        transactions_data = get_operations_from_xlsx(DATA_DIR + "/transactions_excel.xlsx")
 
     # выбор фильтации по статусу транзакции
     while True:
