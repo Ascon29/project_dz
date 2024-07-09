@@ -24,5 +24,5 @@ def get_data(data: str) -> str:
     :param data: полная дата и время в виде строки.
     :return: дата в виде 'DD.MM.YY.
     """
-    date_obj = datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%f")
+    date_obj = datetime.strptime(data, "%Y-%m-%dT%H:%M:%SZ")
     return date_obj.strftime("%d.%m.%Y")

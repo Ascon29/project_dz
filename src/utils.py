@@ -1,12 +1,13 @@
+import csv
 import json
 import logging
 import os
+
 import pandas as pd
-import csv
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler("logs/utils.log", "w")
+file_handler = logging.FileHandler("../logs/utils.log", "w")
 file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
@@ -68,5 +69,6 @@ def get_operations_from_xlsx(file_path):
     return json.loads(operations)
 
 
+# print(get_operations('data/operations.json'))
 # print(get_operations_from_csv('data/transactions.csv'))
 # print(get_operations_from_xlsx('data/transactions_excel.xlsx'))
